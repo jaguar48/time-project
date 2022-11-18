@@ -9,92 +9,77 @@ using System.Diagnostics;
 public class HelloWorld
 {
 
-    public class TimeInterval
-    {
-        public int hour;
-        public int min;
-        public int sec;
-
-        public static int ConvertInputToMillSec(string Time)
-        {
-            var MyClass = new TimeInterval();
-            int hour = MyClass.hour;
-            int min = MyClass.min;
-            int sec = MyClass.sec;
-
-
-            hour = int.Parse(Time.Split(":")[0]);
-            min = int.Parse(Time.Split(":")[1]);
-            sec = int.Parse(Time.Split(":")[2]);
-
-            int TotalTime = (hour * 60 * 60) + (min * 60) + sec;
-
-
-            return TotalTime * 1000;
-
-        }
-
-    }
-
     public static void Main(string[] args)
     {
-        bool session = true;
-        DateTime Start = DateTime.Now;
-
-        while (session)
-        {
-            Console.Clear();
-            Console.WriteLine("Enter your work time in this format (hh:mm:ss)");
-            string? input = Console.ReadLine();
-
-            Console.WriteLine("Enter your Rest time in this format (hh:mm:ss)");
-            string? input2 = Console.ReadLine();
-
-            DateTime StartTime = DateTime.Now;
-
-            Console.Clear();
-            Console.WriteLine("WORK TIME");
-            Thread.Sleep(TimeInterval.ConvertInputToMillSec(input ?? "00:00:05"));
-
-            Console.Clear();
-            Console.WriteLine("Rest Time");
-            Thread.Sleep(TimeInterval.ConvertInputToMillSec(input2 ?? "00:00:05"));
-
-            Console.Clear();
-
-            DateTime End = DateTime.Now;
-            TimeSpan Timmer = (End - StartTime);
-            Console.WriteLine($"Total Console session was {Timmer.Hours} Hour(s)" +
-                $"+ : + {Timmer.Minutes} Minute(s)" +
-                $"+ : {Timmer.Seconds} Second(s)");
-
-            Console.WriteLine(" ");
-
-            Console.WriteLine("Enter \"N\" TO BREAK OR Enter any key to CONTINUE ");
-
-            string? input3 = Console.ReadLine();
-
-            if (input3.ToUpper() == "N")
-            {
-
-                session = false;
+        
+        Console.WriteLine("enter log mins");
+        int enter_log =  Convert.ToInt32(Console.ReadLine());
+        Console.WriteLine("enter break mins");
+        int enter_break = int.Parse(Console.ReadLine());
+        bool check_session = true;
+        
+    
+            while (check_session){
+          
+                if (enter_log >=1 && enter_break >=1){
+                    
+                    int work_time_in_min = enter_log * 60;
+                    // stopwatch.Start();
+                    Thread.Sleep(work_time_in_min);
+                    // int sum_time += work_time_in_min;
+                    
+                    Console.WriteLine("time start:");
+                    // stopwatch.Stop();
+                    // TimeSpan ts = stopwatch.Elapsed;
+                        
+                    //     Console.WriteLine("Elapsed Time is {0:00}:{1:00}:{2:00}.{3}",
+                    //     ts.Hours, ts.Minutes, ts.Seconds, ts.Milliseconds);
+                        
+                for (int i = work_time_in_min; i>=0; i--){
+                      Console.WriteLine("Counting down work Time... {0} Second(s)", i);
+                      Thread.Sleep(1000);
+                      Console.Clear();
+                       
+                    
+                }
+               Console.WriteLine("time ends");
+                
+                Console.WriteLine("running break time");
+                
+                 int break_time_in_min = enter_break * 60;
+                    // stopwatch.Start();
+                    
+                    
+                    Thread.Sleep(break_time_in_min);
+                    
+                for( int bs = break_time_in_min; bs >=0;bs--){
+                    Console.WriteLine("Counting down Rest Time... {0} Second(s)", bs);
+                      Thread.Sleep(1000);
+                      Console.Clear();
+                    
+                }
+            Console.WriteLine("Rest time completed:");
+            Console.WriteLine("To Continue type 1, to end type 2");
+            var check_options = Console.ReadLine();
+            if (check_options == "1"){
+                check_session = true;
             }
-            else
-            {
-                Console.Clear();
-                continue;
+            else if (check_options == "2"){
+                Console.WriteLine("Godbye buddy");
+                break;
+                
             }
-
-
-
+          
+        else{
+             Console.WriteLine("ENTER VALID WORK OR BREAK TIME");
         }
-
-        DateTime EndTime = DateTime.Now;
-        TimeSpan SessionTimmer = (EndTime - Start);
-        Console.WriteLine($"Total Console session was {SessionTimmer.Hours} Hour(s)" +
-            $"+ : + {SessionTimmer.Minutes} Minute(s) " +
-            $"+ : {SessionTimmer.Seconds} Second(s)");
-    }
-
+            
+               
+               
+                }
+            }}
+               
+               
+        
 }
 
